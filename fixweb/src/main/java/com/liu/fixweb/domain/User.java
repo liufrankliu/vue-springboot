@@ -1,0 +1,9 @@
+package com.liu.fixweb.domain;
+
+import lombok.Data;
+
+@Data
+public class User {
+    private String username;
+    private String password;
+}
