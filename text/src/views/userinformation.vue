@@ -30,14 +30,14 @@
 	export default{
 		data(){
 			return{
-				allcount: '',
+				allcount: 0,
 				tableData: []
 			}
 		},
 		methods:{
 			page(currentpage){
 				const _this = this;
-				axios
+				this.$ajax
 					.post("http://localhost:8181/page/select" , {
 						currentpage:currentpage
 					})
@@ -50,17 +50,22 @@
 						 });
 			}
 		},
-		created(){
+		beforeCreate() {
 			const _this = this;
 			axios
-				.get("http://localhost:8181/count")
+				.get("http://localhost:8181/count" , {
+					withCredentials: true
+				})
 				.then(function(res){
-					_this.allcount = res.data;
+					_this.allcount = res.data[0].count;
 				})
 				.catch(function (error) { // 请求失败处理
 				        console.log(error);	
-					 });
-			axios
+				});
+		},
+		created(){
+			const _this = this;
+			this.$ajax
 				.post("http://localhost:8181/page/select" , {
 					currentpage: 1
 				})
@@ -70,7 +75,7 @@
 				})
 				.catch(function (error) { // 请求失败处理
 				        console.log(error);	
-					 });
+				});
 		}
 	}
 </script>

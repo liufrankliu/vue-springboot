@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+
 import Admine from '../views/admine.vue'
 import Loge from '../views/loge.vue'
 import Fixer from '../views/fixer.vue'
