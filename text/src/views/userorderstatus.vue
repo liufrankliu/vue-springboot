@@ -54,7 +54,7 @@
 			}
 		}
 		axios
-			.post("http://localhost:8181/order/information" , {username :this.username} , {
+			.post("http://114.55.248.123:8181/order/information" , {username :this.username} , {
 					withCredentials: true
 			})
 			.then(function(res){

@@ -38,7 +38,7 @@
 			page(currentpage){
 				const _this = this;
 				this.$ajax
-					.post("http://localhost:8181/page/select" , {
+					.post("http://114.55.248.123:8181/page/select" , {
 						currentpage:currentpage
 					})
 					.then(function(res){
@@ -53,7 +53,7 @@
 		beforeCreate() {
 			const _this = this;
 			axios
-				.get("http://localhost:8181/count" , {
+				.get("http://114.55.248.123:8181/count" , {
 					withCredentials: true
 				})
 				.then(function(res){
@@ -66,7 +66,7 @@
 		created(){
 			const _this = this;
 			this.$ajax
-				.post("http://localhost:8181/page/select" , {
+				.post("http://114.55.248.123:8181/page/select" , {
 					currentpage: 1
 				})
 				.then(function(res){

@@ -16,10 +16,19 @@
 				<el-option label="热水器" value="热水器"></el-option>
 			</el-select>
 	    </el-form-item>
-
-	    <el-form-item label="家庭住址">
-			<el-input v-model="form.address"></el-input>
-	    </el-form-item>
+<!-- 
+	    <div class="info">
+	        <div class="input-item">
+	            <span class="input-item-text" style="width:8rem;">请输入关键字</span>
+				<input id='tipinput' type="text" >
+	        </div>
+	    </div> -->
+		
+		<el-form-item label="请输入地址">
+			<el-input id="tipinput"></el-input>
+		</el-form-item>
+		
+		<!-- Modal -->
 
 	    <el-form-item label="留言">
 			<el-input type="textarea" v-model="form.message"></el-input>
@@ -42,25 +51,57 @@
 	          machinename: '',
 			  address: '',
 	          message: ''
-	        }
+	        },
+			city1 : '',
+			searchService : [],
+			markers : [],
+			citylocation : [],
 	      }
 	    },
 	    methods: {
 	      onSubmit() {
 			  const _this = this;
+			  this.form.address = this.city1 + document.getElementById('tipinput').value;
 			  axios
-			  	.post('http://localhost:8181/order' , this.form)
+			  	.post('http://114.55.248.123:8181/order' , this.form)
 			  	.then(function(res){
-					console.log(res.data);
 			  		if(res.data == "success"){
+						alert(订单提交成功)
 						window.location.reload()
 					}
 			  	})
 			  	.catch(function (error) { // 请求失败处理
 			  	        console.log(error);	
 			  	});
-	      }
+			},
+			
 	    },
+		mounted() {
+			var citysearch = new AMap.CitySearch();
+			const _this = this;
+			//自动获取用户IP，返回当前城市
+			citysearch.getLocalCity(function(status, result) {
+			    if (status === 'complete' && result.info === 'OK') {
+			        if (result && result.city && result.bounds) {
+			            _this.city1 = result.city;
+						AMap.plugin('AMap.Autocomplete', function(){
+						
+						  // 实例化Autocomplete
+						  var autoOptions = {
+						    // input 为绑定输入提示功能的input的DOM ID
+							city: _this.city1,
+						    input: 'tipinput'
+						  }
+						  var autoComplete= new AMap.Autocomplete(autoOptions);
+						  // 无需再手动执行search方法，autoComplete会根据传入input对应的DOM动态触发search
+						})
+			        }
+			    } else{
+					alert(服务加载失败);
+				}
+			});
+			
+		},
 		created() {
 			
 		}

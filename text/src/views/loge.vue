@@ -34,7 +34,7 @@
 			tosuccess(){
 				const _this = this;
 				this.$ajax
-					.post('http://localhost:8181/checkloginValidcode'  , {
+					.post('http://114.55.248.123:8181/checkloginValidcode'  , {
 						username : this.input , 
 						password : this.message,
 						validvode : this.loginValidateCode,
@@ -53,6 +53,8 @@
 								_this.$router.push("./admine");
 							}
 							
+						}else{
+							alert(res.data);
 						}
 					})
 					.catch(function (error) { // 请求失败处理
@@ -68,7 +70,7 @@
 				const _this = this;
 				console.log(this)
 				this.$ajax//请求验证码
-					.get('http://localhost:8181/loginValidateCode')
+					.get('http://114.55.248.123:8181/loginValidateCode')
 					.then(function(res){
 						_this.imgsrc = res.data;
 					})
@@ -98,7 +100,7 @@
 		mounted() {
 			const _this = this
 			axios//请求验证码
-				.get('http://localhost:8181/loginValidateCode' , {
+				.get('http://114.55.248.123:8181/loginValidateCode' , {
 					withCredentials: true
 				})
 				.then(function(res){

@@ -8,7 +8,7 @@
 
 项目基于前后端分离的设计方式，通过json进行数据交互。前端基于 Vue，后端基于 SpringBoot、MyBatis 等框架开发。    
 
-现在后端有基于nodejs express进行开发的版本  
+现在后端有基于nodejs express框架进行开发的版本  
 
 ### 技术点  
 利用gd-bmp模块将绘制出的验证码图片转成base64的格式返回给前端  
@@ -23,6 +23,7 @@
 
 借助vue-router来处理路由  
 
+借助高德地图api，实现报修地址关键字提示功能
 
 部署：http://114.55.248.123/dist/index.html#/ 
 

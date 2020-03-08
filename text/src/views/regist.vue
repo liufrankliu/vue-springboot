@@ -32,7 +32,7 @@
 			tosuccess(){
 				const _this = this;
 				this.$ajax
-					.post('http://localhost:8181/checkregistValidateCode'  , {
+					.post('http://114.55.248.123:8181/checkregistValidateCode'  , {
 						username : this.input , 
 						password : this.message,
 						validvode : this.loginValidateCode,
@@ -42,8 +42,8 @@
 						if(res.data == "success"){
 							_this.$router.push("./");
 							alert("注册成功");
-						}else if(res.data == "repeat"){
-							alert("用户名重复");
+						}else{
+							alert(res.data);
 						}
 					})
 					.catch(function (error) { // 请求失败处理
@@ -54,7 +54,7 @@
 			check(){//失去焦点时检查是否用户名重复
 				const _this = this;
 				this.$ajax
-					.get('http://localhost:8181/all')
+					.get('http://114.55.248.123:8181/all')
 					.then(function(res){
 						_this.input = res.data[0].username;
 					})
@@ -66,7 +66,7 @@
 			{
 				const _this = this;
 				this.$ajax//请求验证码
-					.get('http://localhost:8181/loginValidateCode')
+					.get('http://114.55.248.123:8181/loginValidateCode')
 					.then(function(res){
 					_this.imgsrc = res.data;
 					})
@@ -78,7 +78,7 @@
 		created() {
 			const _this = this;
 			axios//请求验证码
-				.get('http://localhost:8181/loginValidateCode' , {
+				.get('http://114.55.248.123:8181/loginValidateCode' , {
 					withCredentials: true
 				})
 				.then(function(res){
